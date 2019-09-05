@@ -1,6 +1,7 @@
-const mc = require('minecraft-protocol')
-const EventEmitter = require('events').EventEmitter
-const pluginLoader = require('./lib/plugin_loader')
+import mc from 'minecraft-protocol';
+import { EventEmitter } from 'events';
+import pluginLoader from './lib/plugin_loader';
+import { supportedVersions } from './lib/version';
 const plugins = {
   bed: require('./lib/plugins/bed'),
   title: require('./lib/plugins/title'),
@@ -35,22 +36,8 @@ const plugins = {
   time: require('./lib/plugins/time'),
   villager: require('./lib/plugins/villager')
 }
-const supportedVersions = require('./lib/version').supportedVersions
 
-module.exports = {
-  createBot,
-  Location: require('./lib/location'),
-  Painting: require('./lib/painting'),
-  Chest: require('./lib/chest'),
-  Furnace: require('./lib/furnace'),
-  Dispenser: require('./lib/dispenser'),
-  EnchantmentTable: require('./lib/enchantment_table'),
-  ScoreBoard: require('./lib/scoreboard'),
-  BossBar: require('./lib/bossbar'),
-  supportedVersions
-}
-
-function createBot (options = {}) {
+export function createBot (options = {}) {
   options.username = options.username || 'Player'
   options.version = options.version || false
   options.plugins = options.plugins || {}
